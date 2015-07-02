@@ -9,7 +9,7 @@ from getuser import get_user
 logging.basicConfig(filename='debug.log',level=logging.DEBUG)
 
 def main():
-    user = get_user('rohit.dureja@hodtmail.com')
+    user = get_user('rohit.dureja@gmail.com')
     print user
 
 if __name__=="__main__":

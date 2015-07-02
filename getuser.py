@@ -1,5 +1,6 @@
 import json
 from time import strftime
+from getcredentials import get_credential
 
 # reads JSON file and checks if user already exists
 def check_if_user_exists(email):
@@ -39,16 +40,16 @@ def create_new_user(email):
         json.dump(users, user_file, indent=4)
     
     return users[email]
-        
-# returns credential if user already exists
-def get_credential_from_file(email):
+
+# get user data from JSON file
+def get_user_data(email):
     # Open the user list JSON file for reading
     with open('json/users.json', 'r') as user_file:
         # Read users 
         users = json.load(user_file)
-    # return user credential
-    return users[email]['credential']
-    
+    # return user data
+    return users[email]
+
 # update user credentials in file
 def update_credential_in_file(email, credential):
     # Open file for reading
@@ -64,13 +65,17 @@ def update_credential_in_file(email, credential):
 
 
 def get_user(email):
-    user=check_if_user_exists(email)
+    
+    user = check_if_user_exists(email)
     if user:
         print "Logging in ..."
         update_credential_in_file(email, 'maximum')
     else:
         print "User doesn't exist. Creating new user ..."
         user = create_new_user(email)
+        credential = get_credential(email)
+        update_credential_in_file(email, credential)
+        user = get_user_data(email)
     return user
         
         
