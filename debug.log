@@ -1,0 +1,3 @@
+WARNING:oauth2client.util:step1_get_authorize_url() takes at most 1 positional argument (2 given)
+WARNING:oauth2client.client:The redirect_uri parameter for OAuth2WebServerFlow.step1_get_authorize_url is deprecated. Please move to passing the redirect_uri in via the constructor.
+INFO:oauth2client.client:Successfully retrieved access token

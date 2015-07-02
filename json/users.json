@@ -1,0 +1,22 @@
+{
+    "rohit.dureja@gmail.com": {
+        "credential": "maximum", 
+        "last-login": "2015-07-02 01:56:42"
+    }, 
+    "rohit.dureja@hodtmail.com": {
+        "credential": "maximum", 
+        "last-login": "2015-07-02 01:58:42"
+    }, 
+    "rohit.dureja@hotmail.com": {
+        "credential": "maximum", 
+        "last-login": "2015-07-02 01:57:01"
+    }, 
+    "email@example.com": {
+        "credential": "url_of_credential_file", 
+        "last-login": "time_of_last_login"
+    }, 
+    "rohit.dureja@htmail.com": {
+        "credential": "maximum", 
+        "last-login": "2015-07-02 01:58:19"
+    }
+}
