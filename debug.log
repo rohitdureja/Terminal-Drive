@@ -1,3 +1,7 @@
 WARNING:oauth2client.util:step1_get_authorize_url() takes at most 1 positional argument (2 given)
 WARNING:oauth2client.client:The redirect_uri parameter for OAuth2WebServerFlow.step1_get_authorize_url is deprecated. Please move to passing the redirect_uri in via the constructor.
 INFO:oauth2client.client:Successfully retrieved access token
+INFO:googleapiclient.discovery:URL being requested: GET https://www.googleapis.com/discovery/v1/apis/drive/v2/rest
+INFO:googleapiclient.discovery:URL being requested: GET https://www.googleapis.com/drive/v2/files?alt=json&maxResults=10
+INFO:googleapiclient.discovery:URL being requested: GET https://www.googleapis.com/discovery/v1/apis/drive/v2/rest
+INFO:googleapiclient.discovery:URL being requested: GET https://www.googleapis.com/drive/v2/files?alt=json&maxResults=10
