@@ -46,9 +46,7 @@ def get_credential_file(email):
     return credential_file_name
 
 # returns the user credentials
-def get_credentials(credential_file):
-    
-    print credential_file
+def get_credentials(credential_file):    
     # create path to credentials directory and user credentials file
     home_dir = os.path.expanduser('~')
     credential_dir = os.path.join(home_dir, '.credentials')
