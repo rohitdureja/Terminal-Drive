@@ -1,11 +1,9 @@
 #!/usr/bin/python
-from treelib import Node, Tree
-
+from treelib import Tree
 import httplib2
 from apiclient import discovery, errors
-
 import logging
-import pprint
+from servicemenu import service_menu
 from getuser import get_user
  
 # Node in directory structure
@@ -22,7 +20,9 @@ logging.basicConfig(filename='debug.log',level=logging.DEBUG)
 def main():
     credentials = get_user('rohit.dureja@gmail.com')
     http = credentials.authorize(httplib2.Http())
+    service_menu(credentials)
     service = discovery.build('drive', 'v2', http=http)
+    
     
     # initialise directory structure
     directory = Tree()
@@ -33,6 +33,7 @@ def main():
             param = {}
             if page_token:
                 param['pageToken'] = page_token
+
             children = service.children().list(folderId='root', **param).execute()
 
             for child in children.get('items', []):
