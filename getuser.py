@@ -26,7 +26,7 @@ def check_if_user_exists(email):
 # creates new user and updates the JSON file
 def create_new_user(email):
     # Create JSON entry for new user
-    entry = {email : {'credential': 'Undefined', 'last-login': strftime("%Y-%m-%d %H:%M:%S")}}
+    entry = {email : {'credential': 'Undefined', 'directory-tree' : 'Undefined', 'last-login': strftime("%Y-%m-%d %H:%M:%S")}}
 
     # Open file for reading
     with open('json/users.json', 'r') as user_file:

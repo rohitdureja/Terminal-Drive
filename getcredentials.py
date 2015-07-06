@@ -1,6 +1,5 @@
 import os
 import md5
-import oauth2client
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
@@ -26,11 +25,14 @@ def get_credential_file(email):
     
     # create path to credentials directory and user credentials file
     home_dir = os.path.expanduser('~')
-    credential_dir = os.path.join(home_dir, '.credentials')
+    termdrive_dir = os.path.join(home_dir, '.termdrive')
+    if not os.path.exists(termdrive_dir):
+            os.makedirs(termdrive_dir)
+    credential_dir = os.path.join(termdrive_dir, 'credentials')
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
     credential_path = os.path.join(credential_dir, credential_file_name)
- 
+    
     # Retrieve the credential file if its exists
     store = Storage(credential_path)
     credentials = store.get()
@@ -48,12 +50,16 @@ def get_credential_file(email):
 # returns the user credentials
 def get_credentials(credential_file):    
     # create path to credentials directory and user credentials file
+    # create path to credentials directory and user credentials file
     home_dir = os.path.expanduser('~')
-    credential_dir = os.path.join(home_dir, '.credentials')
+    termdrive_dir = os.path.join(home_dir, '.termdrive')
+    if not os.path.exists(termdrive_dir):
+            os.makedirs(termdrive_dir)
+    credential_dir = os.path.join(termdrive_dir, 'credentials')
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
     credential_path = os.path.join(credential_dir, credential_file)
-    
+    print credential_path
     # Retrieve the credential file if its exists
     store = Storage(credential_path)
     credentials = store.get()

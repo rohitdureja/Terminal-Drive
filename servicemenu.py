@@ -1,5 +1,12 @@
-def service_menu(credentials):
+from directorytree import build_directory_tree, show_directory_contents
+from uploads import upload_file
+
+import logging
+def service_menu(service):
+    logger = logging.getLogger("runtime_log")
+    logger.debug("service")
     
+    current_dir = "root"
     try:
         while True:
             command = raw_input('>> ')
@@ -7,27 +14,26 @@ def service_menu(credentials):
             
             # List current directory contents
             if(command[0] == "ls"):
-                print "ls"
-                
+                show_directory_contents(current_dir)
+    
             # List available commands
-            if(command[0] == "help"):
+            elif(command[0] == "help"):
                 print "help"
             
             # Build directory structure
-            if(command[0] == "build"):
-                print "build"
+            elif(command[0] == "build"):
+                build_directory_tree(service)
             
             # Download file from drive
-            if(command[0] == "download"):
+            elif(command[0] == "download"):
                 print "download"
                 
             # Upload file to drive
-            if(command[0] == "upload"):
-                print "upload"
+            elif(command[0] == "upload"):
+                upload_file(service, command, current_dir)
                 
             # Quit application
             elif(command[0] == "quit"):
-                print "quit"
                 break;
             
             else:

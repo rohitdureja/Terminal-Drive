@@ -1,80 +1,28 @@
 #!/usr/bin/python
-from treelib import Tree
+
 import httplib2
-from apiclient import discovery, errors
+from apiclient import discovery
 import logging
+
 from servicemenu import service_menu
 from getuser import get_user
- 
-# Node in directory structure
-class node(object):
-    def __init__(self, parentID, fileID, name, ntype):
-        self.parentID = parentID
-        self.fileID = fileID
-        self.name = name
-        self.ntype = ntype
 
 # Enable logging
-logging.basicConfig(filename='debug.log',level=logging.DEBUG)
+FORMAT = '%(levelname)s: %(asctime)s %(filename)s %(funcName)s :: %(message)s'
+logging.basicConfig(filename='termdrive.log',level=logging.DEBUG, format=FORMAT)
+logger = logging.getLogger("runtime_log")
  
 def main():
+    # Get user credentials
     credentials = get_user('rohit.dureja@gmail.com')
+    
+    # Connect to Google Drive and establish a service connection
     http = credentials.authorize(httplib2.Http())
-    service_menu(credentials)
     service = discovery.build('drive', 'v2', http=http)
     
-    
-    # initialise directory structure
-    directory = Tree()
-    directory.create_node("Root", "root")
-    page_token = None
-    while True:
-        try:
-            param = {}
-            if page_token:
-                param['pageToken'] = page_token
-
-            children = service.children().list(folderId='root', **param).execute()
-
-            for child in children.get('items', []):
-                #print 'File Id: %s' % child['id']
-                try:
-                    file__ = service.files().get(fileId=child['id']).execute()
-                    #print 'Title: %s' % file__['title']
-                    #print 'MIME type: %s' % file__['mimeType']
-                    directory.create_node(file__['title'], child['id'], parent = 'root', data=node('root', child['id'], file__['title'], file__['mimeType']))
-                except errors.HttpError, error:
-                    print 'An error occurred: %s' % error
-            
-            page_token = children.get('nextPageToken')
-            if not page_token:
-                break
-        except errors.HttpError, error:
-            print 'An error occurred: %s' % error
-            break
-    
-    directory.show()
-    
-#     results = service.files().list(maxResults=10, 'application/vnd.google-apps.folder').execute()
-#     items = results.get('items', [])
-#     if not items:
-#         print 'No files found.'
-#     else:
-#         print 'Files:'
-#         for item in items:
-#             print '{0} ({1})'.format(item['title'], item['id'])
-
+    # Call the main application loop
+    service_menu(service)
+        
+# Main function
 if __name__=="__main__":
     main()
-
-# def main():
-#     """Shows basic usage of the Google Drive API.
-# 
-#     Creates a Google Drive API service object and outputs the names and IDs
-#     for up to 10 files.
-#     """
-#     credentials = get_credentials()
-
-# 
-# if __name__ == '__main__':
-#     main()
